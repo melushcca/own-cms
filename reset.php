@@ -6,13 +6,13 @@ require 'db.php';
 session_start();
 
 // Make sure email and hash variables aren't empty
-if( isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash']) && !empty($_GET['hash']) )
+if( isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['password']) && !empty($_GET['password']) )
 {
     $email = $mysqli->escape_string($_GET['email']);
-    $hash = $mysqli->escape_string($_GET['hash']);
+    $password = $mysqli->escape_string($_GET['password']);
 
     // Make sure user email with matching hash exist
-    $result = $mysqli->query("SELECT * FROM users WHERE email='$email' AND hash='$hash'");
+    $result = $mysqli->query("SELECT * FROM users WHERE email='$email' AND password='$password'");
 
     if ( $result->num_rows == 0 )
     {
@@ -61,7 +61,7 @@ else {
 
           <!-- This input field is needed, to get the email of the user -->
           <input type="hidden" name="email" value="<?= $email ?>">
-          <input type="hidden" name="hash" value="<?= $hash ?>">
+          <input type="hidden" name="password" value="<?= $password ?>">
 
           <button class="button button-block"/>Ändern</button>
 
